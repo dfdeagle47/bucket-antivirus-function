@@ -1,0 +1,49 @@
+// See also
+// - https://aws.amazon.com/blogs/compute/fanout-s3-event-notifications-to-multiple-endpoints/
+// - https://aws.amazon.com/blogs/compute/messaging-fanout-pattern-for-serverless-architectures-using-amazon-sns/
+// - https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-filtering-examples-invalid
+// For examples of Fanout architecture using SNS
+{
+  "Version": "2008-10-17",
+  "Id": "FanoutPolicy",
+  "Statement": [
+    {
+      "Sid": "TopicOwner",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": [
+        "SNS:Publish",
+        "SNS:RemovePermission",
+        "SNS:SetTopicAttributes",
+        "SNS:DeleteTopic",
+        "SNS:ListSubscriptionsByTopic",
+        "SNS:GetTopicAttributes",
+        "SNS:Receive",
+        "SNS:AddPermission",
+        "SNS:Subscribe"
+      ],
+      "Resource": "<sns-topic-arn>",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceOwner": "<account-id>"
+        }
+      }
+    },
+    {
+      "Sid": "Bucket",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": ["SNS:Publish"],
+      "Resource": "<sns-topic-arn>",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceArn": "arn:aws:s3:::<bucket-name>"
+        }
+      }
+    }
+  ]
+}
