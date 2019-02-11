@@ -38,7 +38,7 @@ mkdir -p bin
 cp /tmp/usr/bin/clamscan /tmp/usr/bin/freshclam /tmp/usr/lib64/* bin/.
 echo "DatabaseMirror database.clamav.net" > bin/freshclam.conf
 
-mkdir -p build
+mkdir -p /opt/app/build
 zip -r9 $lambda_output_file *.py bin
 cd env/lib/python2.7/site-packages
 zip -r9 $lambda_output_file *

@@ -39,6 +39,10 @@ the [amazonlinux](https://hub.docker.com/_/amazonlinux/) [Docker](https://www.do
  image.  The resulting archive will be built at `build/lambda.zip`.  This file will be
  uploaded to AWS for both Lambda functions below.
 
+### Build from Source (Windows)
+
+To build the archive to upload to AWS Lambda using Windows, run `docker-compose up --force-recreate`. The docker-compose.yml acts very similarly to the `make` command. However, on Windows, we have to copy the files to another folder in the container because the `virtualenv` command will fail for the mounted /opt/app folder. Otherwise, the process is the same: the archive will be built at `build/lambda.zip`.
+
 ### AV Definition Bucket
 
 Create an s3 bucket to store current antivirus definitions.  This

@@ -1,0 +1,10 @@
+version: '3'
+services:
+  build-lambda-zip:
+    # We have to copy the files to another directory because /opt/app is mounted
+    # on the filesystem and the `virtualenv` command will crash on Windows.
+    command: /bin/bash -c "cp -R /opt/app/* /opt/app-windows && ./build_lambda.sh"
+    image: amazonlinux:2
+    working_dir: /opt/app-windows
+    volumes:
+      - "./:/opt/app"
