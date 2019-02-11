@@ -26,6 +26,10 @@ ENV = os.getenv("ENV", "")
 
 
 def event_object(event):
+    # If the event comes from SNS, parse the message to get the original S3 event
+    if (event['Records'][0]['EventSource'] == 'aws:sns'):
+        message = event['Records'][0]['Sns']['Message']
+        event = json.loads(message)
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = urllib.unquote_plus(event['Records'][0]['s3']['object']['key'].encode('utf8'))
     if (not bucket) or (not key):
