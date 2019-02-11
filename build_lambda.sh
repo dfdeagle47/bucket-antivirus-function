@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-lambda_output_file=/opt/app/build/lambda.zip
+TIMESTAMP=`date +%F-%H%M`
+lambda_output_file=/opt/app/build/lambda-$TIMESTAMP.zip
 
 set -e
 
