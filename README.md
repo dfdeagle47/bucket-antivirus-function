@@ -205,6 +205,7 @@ the table below for reference.
 | DATADOG_API_KEY | API Key for pushing metrics to DataDog (optional) | | No |
 | AV_PROCESS_ORIGINAL_VERSION_ONLY | Controls that only original version of an S3 key is processed (if bucket versioning is enabled) | False | No |
 | AV_DELETE_INFECTED_FILES | Controls whether infected files should be automatically deleted | False | No |
+| AV_UPDATE_METADATA | Controls whether files should be automatically tagged with metadata | No |
 
 ## S3 Bucket Policy Examples
 
